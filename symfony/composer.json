@@ -41,13 +41,18 @@
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
+    "replace": {
+        "paragonie/random_compat": "*",
+        "symfony/polyfill-intl-icu": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php54": "*",
+        "symfony/polyfill-php56": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-util": "*"
+    },
     "scripts": {
         "symfony-scripts": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "bin/console cache:clear"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
