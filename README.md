@@ -21,7 +21,8 @@ Intallation :
 To build all the containers :
 
     docker-compose up -d
-
+    docker-compose run symfony composer install 
+    docker-compose run symfony chown -R www-data:www-data var
 to see the website go on 
 
     http://localhost:8000/
