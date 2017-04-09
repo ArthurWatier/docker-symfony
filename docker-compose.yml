@@ -21,7 +21,7 @@ nginx:
   volumes:
     - ./ngnix:/var/www/html:rw
   ports:
-    - "80:80"
+    - "8000:80"
   links:
     - symfony
 

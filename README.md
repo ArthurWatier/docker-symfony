@@ -1,19 +1,23 @@
-Ready to use docker + symfony
+Ready to use symfony ngnix postgres
 =======
 
-commands:
+Requirements :
+  Linux :
+        Having docker and docker-compose installed
+        
+        https://docs.docker.com/compose/install/    
+
+  Mac and Windows w8ill need docker-machine :
+        
+        https://docs.docker.com/machine/install-machine/
+
+=======
+
+To build all the containers :
 
     docker-compose up -d
-then go on 
 
-    http://localhost/
+to see the website go on 
 
-to see the website
-if var dir isn't writable check     
-most of linux dist will have to do:
+    http://localhost:8000/
 
-    sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX symfony/var
-else go to :
-
-    http://symfony.com/doc/current/setup/file_permissions.html
-and follow the steps until u can reload localhost and see the project working,

@@ -1,6 +1,11 @@
 {
     "name": "arthur/symfony",
     "license": "proprietary",
+    "authors": [
+        {
+            "name": "arthur"
+        }
+    ],
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -20,7 +25,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/orm": "^2.5",
@@ -65,7 +70,6 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": null
+        }
     }
 }
