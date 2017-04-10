@@ -16,31 +16,39 @@ Requirements :
 2. Install _docker-compose_ :
     * <https://docs.docker.com/compose/install/>
     
+3. *Fork* the project on 
+
+<https://github.com/ArthurWatier/docker-symfony> 
+
+then clone it on ur machine
+        
+    `git clone https://github.com/YOUR-USERNAME/docker-symfony YOUR-PROJECT-NAME`
+    
+    `cd YOUR-PROJECT-NAME`
 How to install in 3 commands :
 -
 To build all the containers :
 
     docker-compose up -d
-    
+
+If you any error see any error [ Typical errors when docker-compose up -d and how to fix ]:go here
+
+
     docker-compose run symfony composer update 
     
-    docker-compose run symfony mkdir var 
-    
-    docker-compose run symfony chown -R www-data:www-data var
 
-to see the website go on 
+    docker-compose run symfony setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+
+
+if u haven;t changed exposed port to see the website go on 
 
     http://localhost:8000/
 
-
-
-
-
-
-
 Typical errors when `docker-compose up -d` and how to fix
 -
-example :
+
+*Fix exposed ports troubles*
+example error:
 * ERROR: for *container-name*  
 * Cannot start service postgres: driver failed programming external connectivity on endpoint *conitainer-name*
 * Bind for 0.0.0.0:5432 failed: port is already allocated
@@ -50,8 +58,19 @@ Sometimes it's useful to force some services to be exposed on specific ports of 
   * nginx couldn't be exposed on port 80 
   * postgresql couldn't be exposed on port 5432 
  
- 1. To do so, copy the `docker-compose.override.yml.dist` as `docker-compose.override.yml` in the root folder of the project
- 2. Here is an example of how to expose other ports :
+ 1. In the root folder of the project copy the 
+ 
+    `docker-compose.override.yml.dist`
+    
+ and name the copy   
+    
+    `docker-compose.override.yml`
+ 
+ in the root folder of the project
+ 
+ 2. Rename the exposed ports of the services u want to change exposure
+ 
+    example :
  ```yaml
  nginx:
   ports:
@@ -61,8 +80,19 @@ Sometimes it's useful to force some services to be exposed on specific ports of 
   ports:
     - '5678:5432'
 ```
-On ports expose the external port (the one you need to access the container) is always the left one the colon 
-* (external:internal)
-* '3000:80'
-    
-will let you access for external connection by the url `localhost:3000/` 
+On ports expose the external port, the one you access the container by is always the left one the colon 
+* (external:container)
+* 3000:80 
+
+will let you access for external connection by the url `localhost:3000/`
+
+3. Force rebuild the containers with 
+
+
+    docker-compose up -d --build
+
+===================================================================
+
+Start coding with your team and evberybody will have the same env !
+
+====================================================================
