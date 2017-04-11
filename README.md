@@ -92,7 +92,7 @@ Typical errors when `docker-compose up -d` and how to fix
 *Fix exposed ports troubles*
 example error:
 * ERROR: for *container-name*  
-* Cannot start service postgres: driver failed programming external connectivity on endpoint *conitainer-name*
+* Cannot start service postgres: driver failed programming external connectivity on endpoint *container-name*
 * Bind for 0.0.0.0:5432 failed: port is already allocated
 
 Sometimes it's useful to force some services to be exposed on specific ports of the host machine, for example:
