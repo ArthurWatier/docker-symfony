@@ -25,7 +25,7 @@ Install guide :
 
 Clone it on ur machine
         
-    `git clone https://github.com/YOUR-GIT-USERNAME/docker-symfony YOUR-PROJECT-NAME`
+    git clone https://github.com/YOUR-GIT-USERNAME/docker-symfony YOUR-PROJECT-NAME
     
 To build all the containers :
 
@@ -36,8 +36,8 @@ then build and run the containers
 
 update composer symfony
 
-    docker-compose run symfony composer update 
-if you are in linux distro :
+if you are in linux dist :
+-   
    give the good rights access for the var directory
     
         sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
@@ -48,7 +48,8 @@ if you are in linux distro :
 
    if this return error try to add the -n option
    
-if u are on Mac distro or any distro who support the chmod +a option
+If u are on Mac distro or any distro who support the chmod +a option
+-   
    firt delete var and logs
         
         rm -rf var/cache/*
@@ -62,9 +63,28 @@ if u are on Mac distro or any distro who support the chmod +a option
    
         sudo chmod -R +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" symfony/var
 
-if u haven't changed exposed port to see the website go on 
+give the good rights access for the var directory
 
-    http://localhost:8000/
+    sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
+    sudo setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
+
+Then update composer dependencies 
+-
+    docker-compose run symfony composer update 
+
+By default, your project URL is at `http://localhost:8000/`
+-
+
+Useful commands
+-
+
+When your are on cd YOUR-PROJECT-NAME/ :
+  * Stop all the containers of the project : `docker-compose stop`
+  * Start all the containers : `docker-compose start`
+  * Run symfony console clear:cache : `docker-compose run symfony ./bin/console c:c`
+  * Run symfony console doctrine:schema:update : `docker-compose run symfony ./bin/console d:s:u --dump-sql`
+  * Run symfony console doctrine:schema:update : `docker-compose run symfony ./bin/console d:s:u --force`
+  * See all the container : `docker-compose ps`
 
 Typical errors when `docker-compose up -d` and how to fix
 -
@@ -80,38 +100,40 @@ Sometimes it's useful to force some services to be exposed on specific ports of 
   * nginx couldn't be exposed on port 80 
   * postgresql couldn't be exposed on port 5432 
  
- 1. In the root folder of the project copy the 
- 
-    `docker-compose.override.yml.dist`
+ 1. Go to the root folder of the project  
+       
+        cd  YOUR-PROJECT-NAME/
     
- and name the copy   
+    Then find the 
     
-    `docker-compose.override.yml`
+        docker-compose.override.yml.dist
+    
+   and copy/paste on the same folder, then rename it  
+    
+        docker-compose.override.yml
+    
+   You should had `docker-compose.yml` to your .gitignore to not mess-up with other team members 
  
- in the root folder of the project
- 
- 2. Rename the exposed ports of the services u want to change exposure
+ 2. Open `docker-compose.yml` and rename the exposed ports of the services
  
     example :
- ```yaml
- nginx:
-  ports:
-    - '3000:80'
-
- postgres:
-  ports:
-    - '5678:5432'
-```
-On ports expose the external port, the one you access the container by is always the left one the colon 
-* (external:container)
-* 3000:80 
-
-will let you access for external connection by the url `localhost:3000/`
+     ```yaml
+     nginx:
+      ports:
+        - '3000:80'
+    
+     postgres:
+      ports:
+        - '5678:5432'
+    ```
+    On ports expose the external port is always the left one 
+    * (external:container)
+    * 3000:80 
+    will let you access for external connection by the url `localhost:3000`
 
 3. Force rebuild the containers with 
 
-
-    docker-compose up -d --build
+        docker-compose up -d --build
 
 ===================================================================
 
