@@ -16,31 +16,53 @@ Requirements :
 2. Install _docker-compose_ :
     * <https://docs.docker.com/compose/install/>
     
-3. *Fork* the project on 
+Install guide :
+-
+
+*Fork* the project on 
 
 <https://github.com/ArthurWatier/docker-symfony> 
 
-then clone it on ur machine
+Clone it on ur machine
         
-    `git clone https://github.com/YOUR-USERNAME/docker-symfony YOUR-PROJECT-NAME`
+    `git clone https://github.com/YOUR-GIT-USERNAME/docker-symfony YOUR-PROJECT-NAME`
     
-    `cd YOUR-PROJECT-NAME`
-How to install in 3 commands :
--
 To build all the containers :
+
+    cd YOUR-PROJECT-NAME
+then build and run the containers
 
     docker-compose up -d
 
-If you any error see any error [ Typical errors when docker-compose up -d and how to fix ]:go here
-
+update composer symfony
 
     docker-compose run symfony composer update 
+if you are in linux distro :
+   give the good rights access for the var directory
     
+        sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
+        
+   then
+    
+        sudo setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
 
-    docker-compose run symfony setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+   if this return error try to add the -n option
+   
+if u are on Mac distro or any distro who support the chmod +a option
+   firt delete var and logs
+        
+        rm -rf var/cache/*
+        rm -rf var/logs/*
+        
+   then set the rights for www-data
+   
+        sudo chmod -R +a "www-data allow delete,write,append,file_inherit,directory_inherit" symfony/var
+   
+   and 
+   
+        sudo chmod -R +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" symfony/var
 
-
-if u haven;t changed exposed port to see the website go on 
+if u haven't changed exposed port to see the website go on 
 
     http://localhost:8000/
 
@@ -93,6 +115,6 @@ will let you access for external connection by the url `localhost:3000/`
 
 ===================================================================
 
-Start coding with your team and evberybody will have the same env !
+Start coding with your team and enjoy!
 
 ====================================================================
