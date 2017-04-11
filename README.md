@@ -20,27 +20,29 @@ Requirements :
 
 <https://github.com/ArthurWatier/docker-symfony> 
 
-then clone it on ur machine
+Clone it on ur machine
         
-    `git clone https://github.com/YOUR-USERNAME/docker-symfony YOUR-PROJECT-NAME`
+    `git clone https://github.com/YOUR-GIT-USERNAME/docker-symfony YOUR-PROJECT-NAME`
     
-    `cd YOUR-PROJECT-NAME`
 How to install in 3 commands :
 -
 To build all the containers :
 
+    cd YOUR-PROJECT-NAME
+then build and run the containers
+
     docker-compose up -d
 
-If you any error see any error [ Typical errors when docker-compose up -d and how to fix ]:go here
-
+update composer symfony
 
     docker-compose run symfony composer update 
     
+give the good rights access for the var directory
 
-    docker-compose run symfony setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+    sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
+    sudo setfacl -dR -m u:www-data:rwX -m u:`whoami`:rwX symfony/var
 
-
-if u haven;t changed exposed port to see the website go on 
+if u haven't changed exposed port to see the website go on 
 
     http://localhost:8000/
 
