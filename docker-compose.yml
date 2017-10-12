@@ -7,9 +7,9 @@ symfony:
     - postgres
   environment:
     DATABASE_HOST: postgres
-    DATABASE_NAME: projet_3
-    DATABASE_USER: projet_3
-    DATABASE_PASSWORD: Projet_3
+    DATABASE_NAME: le_louvre
+    DATABASE_USER: le_louvre
+    DATABASE_PASSWORD: le_louvre
     MAILER_HOST: mailhog
     MAILER_PORT: 1025
     SECRET: ThisIsTheProject_3
@@ -19,9 +19,9 @@ symfony:
 nginx:
   build: ./ngnix
   volumes:
-    - ./ngnix:/var/www/html:rw
+    - "./symfony:/var/www/html:rw"
   ports:
-    - "8000:80"
+    - "80:80"
   links:
     - symfony
 
@@ -30,8 +30,8 @@ postgres:
   ports:
     - '5432:5432'
   environment:
-    POSTGRES_USER: projet_3
-    POSTGRES_PASSWORD: Projet_3
+    POSTGRES_USER: le_louvre
+    POSTGRES_PASSWORD: le_louvre
 
 mailhog:
   image: mailhog/mailhog

@@ -1,16 +1,13 @@
-# Example if u want to rewrite the exposed port of ngninx :
-# the left
 nginx:
   ports:
     - '80:80'
 
-# Change the exposed port of postgres :
 postgres:
   ports:
     - '5432:5432'
 
 # Adding Xdebug config
-backend:
+symfony:
   environment:
     XDEBUG_CONFIG: 'remote_host={YOUR_INET_ADDRESS} idekey=PHPSTORM'
     PHP_IDE_CONFIG: 'serverName=localhost'
