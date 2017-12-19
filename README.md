@@ -25,7 +25,7 @@ Install guide :
 
 Clone it on ur machine
         
-    git clone https://github.com/YOUR-GIT-USERNAME/docker-symfony YOUR-PROJECT-NAME
+    git clone https://github.com/ArthurWatier/docker-symfony YOUR-PROJECT-NAME
     
 To build all the containers :
 
